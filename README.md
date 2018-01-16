@@ -1,6 +1,6 @@
-# docker-debian-build-node
+# docker-debian9-build-node
 
-Dockerfile for a Debian build node.
+Dockerfile for a Debian 9 (stretch) build node.
 
 
 ## Building
@@ -8,4 +8,4 @@ Dockerfile for a Debian build node.
     $ docker build -t <tag> <path_to_dockerfile>
 
 To create the official container image, substitute `<tag>` with
-_essdmscdm/debian-build-node:<version>_.
+_essdmscdm/debian9-build-node:<version>_.
