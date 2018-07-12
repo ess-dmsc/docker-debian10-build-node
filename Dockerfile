@@ -2,7 +2,7 @@ FROM debian:stretch
 
 RUN apt-get update && \
     apt-get install -y bzip2 clang-format-3.9 clang-tidy-3.9 cloc cmake cppcheck curl doxygen gcc git graphviz \
-        g++ libpcap-dev lcov make mpich python3 python3-pip valgrind autoconf automake libtool perl && \
+        g++ libpcap-dev lcov make mpich python-dev python3 python3-pip valgrind autoconf automake libtool perl && \
     apt-get autoremove -y && \
     apt-get clean
 
