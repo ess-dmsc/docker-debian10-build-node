@@ -2,11 +2,21 @@ FROM debian:stretch
 
 RUN apt-get update && \
     apt-get install -y bzip2 clang-format-3.9 clang-tidy-3.9 \
-        cloc cmake cppcheck curl doxygen gcc git graphviz g++ libpcap-dev lcov make \
+        cloc cmake curl doxygen gcc git graphviz g++ libpcap-dev lcov make \
         mpich python-dev python3 python3-pip valgrind autoconf automake libtool perl && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN cd /tmp && \
+    curl -o cppcheck-1.80.tar.gz -L https://github.com/danmar/cppcheck/archive/1.80.tar.gz && \
+    tar xf cppcheck-1.80.tar.gz && \
+    cd cppcheck-1.80 && \
+    mkdir build && \
+    cmake ../cppcheck-1.80 && \
+    make install && \
+    cd .. && \
+    rm -rf cppcheck-1.80*
 
 RUN pip3 install --force-reinstall pip==9.0.3 && \
     pip3 install conan==1.3.3 coverage==4.4.2 flake8==3.5.0 gcovr==3.4 && \
