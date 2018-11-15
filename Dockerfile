@@ -27,7 +27,7 @@ ENV CONAN_USER_HOME=/conan
 RUN mkdir $CONAN_USER_HOME && \
     conan
 
-COPY files/registry.txt $CONAN_USER_HOME/.conan/
+COPY files/registry.json $CONAN_USER_HOME/.conan/
 
 COPY files/default_profile $CONAN_USER_HOME/.conan/profiles/default
 
