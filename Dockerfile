@@ -9,14 +9,14 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 RUN cd /tmp && \
-    curl -o cppcheck-1.80.tar.gz -L https://github.com/danmar/cppcheck/archive/1.80.tar.gz && \
-    tar xf cppcheck-1.80.tar.gz && \
-    cd cppcheck-1.80 && \
+    curl -o cppcheck-1.86.tar.gz -L https://github.com/danmar/cppcheck/archive/1.86.tar.gz && \
+    tar xf cppcheck-1.86.tar.gz && \
+    cd cppcheck-1.86 && \
     mkdir build && \
-    cmake ../cppcheck-1.80 && \
+    cmake ../cppcheck-1.86 && \
     make install && \
     cd .. && \
-    rm -rf cppcheck-1.80*
+    rm -rf cppcheck-1.86*
 
 RUN pip3 install --force-reinstall pip==9.0.3 && \
     pip3 install conan==1.9.1 coverage==4.4.2 flake8==3.5.0 gcovr==3.4 && \
