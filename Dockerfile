@@ -1,12 +1,25 @@
 FROM debian:stretch
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y bzip2 clang-format-3.9 clang-tidy-3.9 \
         cloc cmake curl doxygen gcc git graphviz g++ libpcap-dev lcov make \
-        mpich python-dev python3 python3-pip valgrind autoconf automake libtool perl && \
+        mpich valgrind autoconf automake libtool perl build-essential \
+        libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
+        libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+RUN cd /tmp && \
+    curl -o Python-3.6.8.tgz -L https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz && \
+    tar xf Python-3.6.8.tgz && \
+    cd Python-3.6.8 && \
+    ./configure --enable-optimizations --with-ensurepip=install && \
+    make && \
+    make altinstall && \
+    cd .. && \
+    rm -rf Python-3.6.8*
 
 RUN cd /tmp && \
     curl -o cppcheck-1.86.tar.gz -L https://github.com/danmar/cppcheck/archive/1.86.tar.gz && \
@@ -18,8 +31,8 @@ RUN cd /tmp && \
     cd .. && \
     rm -rf cppcheck-1.86*
 
-RUN pip3 install --force-reinstall pip==9.0.3 && \
-    pip3 install conan==1.12.0 coverage==4.4.2 flake8==3.5.0 gcovr==3.4 && \
+RUN pip3.6 install --force-reinstall pip==9.0.3 && \
+    pip3.6 install conan==1.12.0 coverage==4.4.2 flake8==3.5.0 gcovr==3.4 && \
     rm -rf /root/.cache/pip/*
 
 ENV CONAN_USER_HOME=/conan
