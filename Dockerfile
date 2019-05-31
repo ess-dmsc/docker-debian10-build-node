@@ -3,7 +3,7 @@ FROM debian:stretch
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y bzip2 clang-format-3.9 clang-tidy-3.9 \
-        cloc cmake curl doxygen gcc git graphviz g++ libpcap-dev lcov make \
+        cloc cmake curl doxygen gcc git graphviz g++ flex lcov make \
         mpich valgrind autoconf automake libtool perl build-essential \
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
         libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev && \
@@ -39,13 +39,12 @@ ENV CONAN_USER_HOME=/conan
 RUN mkdir $CONAN_USER_HOME && \
     conan
 
-COPY files/remotes.json $CONAN_USER_HOME/.conan/
+RUN conan config install http://github.com/ess-dmsc/conan-configuration.git
+
 COPY files/default_profile $CONAN_USER_HOME/.conan/profiles/default
 
 RUN ln -s /usr/lib/llvm-3.9/bin/clang-format /usr/bin/clang-format
 RUN ln -s /usr/lib/llvm-3.9/bin/clang-tidy /usr/bin/clang-tidy
-
-RUN conan install cmake_installer/3.10.0@conan/stable
 
 RUN git clone https://github.com/ess-dmsc/build-utils.git && \
     cd build-utils && \
