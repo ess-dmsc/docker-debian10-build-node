@@ -1,8 +1,8 @@
-FROM debian:stretch
+FROM debian:buster
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y bzip2 clang-format-3.9 clang-tidy-3.9 \
+    apt-get install -y bzip2 clang-format clang-tidy \
         cloc cmake curl doxygen gcc git graphviz g++ flex lcov make \
         mpich valgrind autoconf automake libtool perl build-essential \
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
@@ -22,14 +22,14 @@ RUN cd /tmp && \
     rm -rf Python-3.6.8*
 
 RUN cd /tmp && \
-    curl -o cppcheck-1.86.tar.gz -L https://github.com/danmar/cppcheck/archive/1.86.tar.gz && \
-    tar xf cppcheck-1.86.tar.gz && \
-    cd cppcheck-1.86 && \
+    curl -o cppcheck-1.90.tar.gz -L https://github.com/danmar/cppcheck/archive/1.90.tar.gz && \
+    tar xf cppcheck-1.90.tar.gz && \
+    cd cppcheck-1.90 && \
     mkdir build && \
-    cmake ../cppcheck-1.86 && \
+    cmake ../cppcheck-1.90 && \
     make install && \
     cd .. && \
-    rm -rf cppcheck-1.86*
+    rm -rf cppcheck-1.90*
 
 RUN pip3.6 install conan==1.20.5 coverage==4.4.2 flake8==3.5.0 gcovr==4.1 && \
     rm -rf /root/.cache/pip/*
@@ -43,8 +43,8 @@ RUN conan config install http://github.com/ess-dmsc/conan-configuration.git
 
 COPY files/default_profile $CONAN_USER_HOME/.conan/profiles/default
 
-RUN ln -s /usr/lib/llvm-3.9/bin/clang-format /usr/bin/clang-format
-RUN ln -s /usr/lib/llvm-3.9/bin/clang-tidy /usr/bin/clang-tidy
+# RUN ln -s /usr/lib/llvm-7/bin/clang-format /usr/bin/clang-format
+# RUN ln -s /usr/lib/llvm-7/bin/clang-tidy /usr/bin/clang-tidy
 
 RUN git clone https://github.com/ess-dmsc/build-utils.git && \
     cd build-utils && \
