@@ -1,4 +1,4 @@
-# docker-debian9-build-node
+# docker-debian10-build-node
 
 Dockerfile for a Debian 10 (buster) build node.
 
