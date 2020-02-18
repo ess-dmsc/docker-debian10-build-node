@@ -3,7 +3,7 @@ FROM debian:buster
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y bzip2 clang-format clang-tidy \
-        cloc cmake curl doxygen gcc git graphviz g++ flex lcov make \
+        cloc cmake curl doxygen gcc git graphviz g++ flex lcov make ninja-build \
         mpich valgrind autoconf automake libtool perl build-essential \
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
         libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev && \
