@@ -6,20 +6,11 @@ RUN apt-get update && \
         cloc cmake curl doxygen gcc git graphviz g++ flex lcov make ninja-build \
         mpich valgrind autoconf automake libtool perl build-essential \
         libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev \
-        libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev && \
+        libncurses5-dev libncursesw5-dev xz-utils libffi-dev liblzma-dev \
+        python3-pip && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
-RUN cd /tmp && \
-    curl -o Python-3.6.8.tgz -L https://www.python.org/ftp/python/3.6.8/Python-3.6.8.tgz && \
-    tar xf Python-3.6.8.tgz && \
-    cd Python-3.6.8 && \
-    ./configure --enable-optimizations --with-ensurepip=install && \
-    make && \
-    make altinstall && \
-    cd .. && \
-    rm -rf Python-3.6.8*
 
 RUN cd /tmp && \
     curl -o cppcheck-1.90.tar.gz -L https://github.com/danmar/cppcheck/archive/1.90.tar.gz && \
@@ -31,7 +22,7 @@ RUN cd /tmp && \
     cd .. && \
     rm -rf cppcheck-1.90*
 
-RUN pip3.6 install conan==1.22.2 coverage==4.4.2 flake8==3.5.0 gcovr==4.1 && \
+RUN pip3 install conan==1.22.2 coverage==4.4.2 flake8==3.5.0 gcovr==4.1 && \
     rm -rf /root/.cache/pip/*
 
 ENV CONAN_USER_HOME=/conan
