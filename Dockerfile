@@ -46,6 +46,8 @@ RUN adduser jenkins
 
 RUN chown -R jenkins $CONAN_USER_HOME/.conan
 
+RUN conan config set general.revisions_enabled=True
+
 USER jenkins
 
 WORKDIR /home/jenkins
