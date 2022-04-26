@@ -7,7 +7,7 @@ properties([
   disableConcurrentBuilds(abortPrevious: true)
 ])
 
-imageVersion = '4.2.0'
+imageVersion = '4.2.1'
 
 imageName = "dockerregistry.esss.dk/ecdc_group/build-node-images/debian10-build-node:${imageVersion}"
 
